@@ -1,9 +1,9 @@
-## Twisted Tic Tac Toe 🎮✨ ##
+# Twisted Tic Tac Toe 🎮✨ #
 A fun twist on the classic Tic Tac Toe game with emojis, limited moves, and colorful gameplay!
 
 Game Screenshot Example screenshot would go here
 
-# Features 🌟 #
+## Features 🌟 ##
 🎭 Emoji-based gameplay - Choose from different emoji categories
 
 🔄 Limited moves - Only 3 emojis per player on the board at once
@@ -16,7 +16,7 @@ Game Screenshot Example screenshot would go here
 
 📱 Mobile-friendly - Works great on all devices
 
-# How to Play 📖 #
+## How to Play 📖 ##
 Select Categories: Each player chooses an emoji category and avatar
 
 Take Turns: Players alternate placing random emojis from their category
@@ -27,14 +27,14 @@ Vanishing Act: When placing a 4th emoji, your oldest one disappears
 
 Win Condition: First to get 3 matching emojis in a row wins!
 
-# Rules 🧐 #
+## Rules 🧐 ##
 🚫 You can't place an emoji where your oldest emoji was
 
 🔄 The oldest emoji vanishes when you place your 4th one
 
 🏆 First to get 3 in a row (horizontal, vertical, or diagonal) wins the round
 
-Installation 💻
+### Installation 💻###
 Clone the repository:
 
 bash
@@ -50,7 +50,7 @@ bash
 npm start
 Open your browser to http://localhost:3000
 
-# Technologies Used 🛠️ #
+## Technologies Used 🛠️ ##
 
 React.js
 
@@ -60,8 +60,12 @@ HTML5
 
 JavaScript (ES6+)
 
-Contributing 🤝
+### Contributing 🤝###
 Contributions are welcome! Please open an issue or pull request for any improvements.
+
+### Live Link ###
+
+https://emoji-tic-tac-toe-five.vercel.app/
 
 License 📄
 This project is licensed under the MIT License.
