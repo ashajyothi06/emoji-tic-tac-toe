@@ -34,19 +34,18 @@ Win Condition: First to get 3 matching emojis in a row wins!
 
 🏆 First to get 3 in a row (horizontal, vertical, or diagonal) wins the round
 
-### Installation 💻###
+### Installation 💻
 Clone the repository:
 
-bash
+
 git clone https://github.com/yourusername/twisted-tictactoe.git
+
 Install dependencies:
 
-bash
 cd twisted-tictactoe
 npm install
 Start the development server:
 
-bash
 npm start
 Open your browser to http://localhost:3000
 
@@ -60,15 +59,14 @@ HTML5
 
 JavaScript (ES6+)
 
-### Contributing 🤝###
+### Contributing 🤝
 Contributions are welcome! Please open an issue or pull request for any improvements.
 
 ### Live Link ###
 
 https://emoji-tic-tac-toe-five.vercel.app/
 
-License 📄
-This project is licensed under the MIT License.
+
 
 Enjoy the game! 🎉 If you have any questions or feedback, please don't hesitate to reach out.
 
