@@ -683,3 +683,730 @@ body {
 }
 
 @keyframes
+
+/* Replace your :root variables with these */
+:root {
+  --primary-1: #6a11cb;
+  --primary-2: #2575fc;
+  --accent-1: #ff3e9d;
+  --accent-2: #ffcc00;
+  --accent-3: #00e676;
+  --text-color: #2c3e50;
+  --light-bg: #f8f9fa;
+  --cell-size: 90px;
+  
+  /* New vibrant color palette */
+  --vibrant-purple: #8a2be2;
+  --vibrant-blue: #4169e1;
+  --vibrant-pink: #ff69b4;
+  --vibrant-orange: #ff8c00;
+  --vibrant-green: #3cb371;
+  --vibrant-yellow: #ffd700;
+  
+  /* Gradient backgrounds */
+  --main-gradient: linear-gradient(135deg, #f5f7fa 0%, #e0e8ff 100%);
+  --card-gradient: linear-gradient(to bottom right, #ffffff, #f0f4ff);
+  --button-gradient: linear-gradient(45deg, var(--vibrant-purple), var(--vibrant-blue), var(--vibrant-pink));
+  
+  /* Font variables */
+  --main-font: 'Poppins', 'Segoe UI', sans-serif;
+  --heading-font: 'Fredoka One', 'Comic Neue', cursive;
+  --emoji-font: 'Segoe UI Emoji', 'Apple Color Emoji', sans-serif;
+}
+
+/* Add this to your <head> in HTML:
+<link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+*/
+
+/* Base styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--main-gradient);
+  min-height: 100vh;
+  font-family: var(--main-font);
+  color: var(--text-color);
+  line-height: 1.6;
+}
+
+/* App container */
+.app {
+  max-width: 900px;
+  margin: 20px auto;
+  padding: 25px;
+  background: white;
+  border-radius: 25px;
+  box-shadow: 0 15px 40px rgba(0, 0, 100, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.app::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 8px;
+  background: var(--button-gradient);
+}
+
+/* Typography */
+h1, h2, h3 {
+  font-family: var(--heading-font);
+  font-weight: 400;
+  letter-spacing: 0.5px;
+}
+
+h1 {
+  font-size: 2.8rem;
+  background: linear-gradient(to right, var(--vibrant-purple), var(--vibrant-pink));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 15px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+  font-size: 2.2rem;
+  color: var(--vibrant-purple);
+  margin-bottom: 20px;
+}
+
+h3 {
+  font-size: 1.8rem;
+  color: var(--vibrant-blue);
+  margin-bottom: 15px;
+}
+
+/* Header styles */
+.app-header {
+  text-align: center;
+  margin-bottom: 30px;
+  padding: 25px;
+  background: var(--card-gradient);
+  border-radius: 20px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+  position: relative;
+  border: 1px solid rgba(255, 255, 255, 0.7);
+}
+
+/* Score display */
+.scores {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  margin-top: 20px;
+}
+
+.player-score {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 12px 25px;
+  border-radius: 50px;
+  background: white;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  border: 2px solid rgba(0, 0, 0, 0.05);
+  font-weight: 600;
+}
+
+.player-score.active {
+  transform: scale(1.1);
+  box-shadow: 0 0 25px rgba(138, 43, 226, 0.3);
+  border: 2px solid var(--vibrant-yellow);
+}
+
+/* Buttons */
+.button {
+  font-family: var(--heading-font);
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  font-size: 1.1rem;
+  letter-spacing: 0.5px;
+}
+
+.button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(45deg, var(--vibrant-purple), var(--vibrant-pink));
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: -1;
+}
+
+.button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.button:hover::before {
+  opacity: 1;
+}
+
+.help-button {
+  background: var(--button-gradient);
+  color: white;
+  padding: 15px 30px;
+  margin: 0 auto 30px;
+  box-shadow: 0 6px 20px rgba(138, 43, 226, 0.3);
+  font-weight: 600;
+}
+
+.start-button {
+  background: var(--button-gradient);
+  color: white;
+  padding: 18px 40px;
+  font-size: 1.3rem;
+  margin: 30px auto 0;
+  box-shadow: 0 8px 25px rgba(138, 43, 226, 0.3);
+  font-weight: 600;
+}
+
+/* Game board */
+.board {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin: 40px auto;
+  max-width: calc(var(--cell-size) * 3 + 40px);
+  background: white;
+  padding: 30px;
+  border-radius: 25px;
+  box-shadow: 
+    0 10px 30px rgba(0, 0, 0, 0.1),
+    inset 0 0 20px rgba(0, 0, 0, 0.05);
+  position: relative;
+  background: var(--card-gradient);
+}
+
+.cell {
+  width: 100%;
+  height: 100%;
+  font-size: 3.5rem;
+  font-family: var(--emoji-font);
+  background: white;
+  border: none;
+  border-radius: 15px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.cell:hover:not(.disabled) {
+  transform: scale(1.08);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+/* Player selection */
+.player-selection {
+  display: flex;
+  justify-content: space-around;
+  margin: 40px 0;
+  flex-wrap: wrap;
+  gap: 30px;
+}
+
+.player-option {
+  width: 45%;
+  min-width: 280px;
+  padding: 25px;
+  border-radius: 20px;
+  background: var(--card-gradient);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  transition: all 0.4s ease;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.7);
+}
+
+.player-option:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+}
+
+/* Emoji preview */
+.emoji-preview {
+  margin-top: 20px;
+  font-size: 2.5rem;
+  font-family: var(--emoji-font);
+  text-align: center;
+  padding: 20px;
+  border-radius: 15px;
+  background: white;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Win effect */
+.win-effect {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1000;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.win-emoji {
+  font-size: 3rem;
+  font-family: var(--emoji-font);
+  animation: float-up 4s ease-in-out forwards;
+  opacity: 0;
+  filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.3));
+}
+
+/* Animations */
+@keyframes float-up {
+  0% {
+    transform: translateY(100vh) rotate(0deg) scale(0.5);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  50% {
+    transform: translateY(50vh) rotate(180deg) scale(1.2);
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-100px) rotate(360deg) scale(0.8);
+    opacity: 0;
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .app {
+    padding: 15px;
+    margin: 10px;
+    border-radius: 20px;
+  }
+  
+  h1 {
+    font-size: 2rem;
+  }
+  
+  .player-selection {
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .player-option {
+    width: 100%;
+    min-width: auto;
+  }
+  
+  .cell {
+    font-size: 2.5rem;
+  }
+}
+/* Add this to your CSS */
+.game-container {
+  position: relative;
+  padding: 30px;
+  border-radius: 25px;
+  overflow: hidden;
+  isolation: isolate; /* Contains the background */
+}
+
+/* Multi-color animated background */
+.game-container::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: 
+    linear-gradient(45deg, 
+      rgba(255, 105, 180, 0.15) 0%, 
+      rgba(65, 105, 225, 0.15) 50%, 
+      rgba(0, 255, 157, 0.15) 100%),
+    radial-gradient(circle at 20% 30%, rgba(138, 43, 226, 0.2) 0%, transparent 40%),
+    radial-gradient(circle at 80% 70%, rgba(255, 215, 0, 0.2) 0%, transparent 40%);
+  animation: gradientShift 15s ease infinite alternate;
+  background-size: 200% 200%;
+}
+
+/* Board styling with glass effect */
+.board {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 
+    0 10px 30px rgba(0, 0, 0, 0.1),
+    0 0 0 1px rgba(255, 255, 255, 0.5) inset;
+}
+
+/* Animated gradient background */
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 0%;
+  }
+  25% {
+    background-position: 100% 0%;
+  }
+  50% {
+    background-position: 100% 100%;
+  }
+  75% {
+    background-position: 0% 100%;
+  }
+  100% {
+    background-position: 0% 0%;
+  }
+}
+
+/* Add these to your existing :root variables */
+:root {
+  --vibrant-purple: #8a2be2;
+  --vibrant-blue: #4169e1;
+  --vibrant-pink: #ff69b4;
+  --vibrant-green: #00ff9d;
+  --vibrant-yellow: #ffd700;
+}
+/* Add these styles to your existing CSS */
+.game-container {
+  position: relative;
+  padding: 30px;
+  border-radius: 25px;
+  overflow: hidden;
+  isolation: isolate;
+  background: linear-gradient(135deg, #f5f7fa 0%, #e0e8ff 100%);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+}
+
+/* Colorful animated background */
+.game-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  background: 
+    /* Colorful dots pattern */
+    radial-gradient(circle at 20% 30%, rgba(138, 43, 226, 0.1) 0%, transparent 25%),
+    radial-gradient(circle at 80% 70%, rgba(255, 215, 0, 0.1) 0%, transparent 25%),
+    radial-gradient(circle at 40% 80%, rgba(255, 105, 180, 0.1) 0%, transparent 25%),
+    radial-gradient(circle at 60% 20%, rgba(0, 255, 157, 0.1) 0%, transparent 25%),
+    /* Subtle gradient overlay */
+    linear-gradient(to bottom right, 
+      rgba(255, 255, 255, 0.9) 0%, 
+      rgba(240, 248, 255, 0.8) 100%);
+  animation: colorPulse 15s ease infinite alternate;
+}
+
+/* Board styling with enhanced visual appeal */
+.board {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  box-shadow: 
+    0 10px 30px rgba(0, 0, 0, 0.1),
+    inset 0 0 15px rgba(255, 255, 255, 0.8);
+  position: relative;
+  z-index: 2;
+}
+
+/* Colorful animated effects */
+@keyframes colorPulse {
+  0% {
+    opacity: 0.8;
+    background-position: 0% 0%;
+  }
+  25% {
+    opacity: 1;
+  }
+  50% {
+    background-position: 100% 100%;
+  }
+  75% {
+    opacity: 0.9;
+  }
+  100% {
+    opacity: 0.8;
+    background-position: 100% 0%;
+  }
+}
+
+/* Add these to your :root if not already present */
+:root {
+  --vibrant-purple: #8a2be2;
+  --vibrant-blue: #4169e1;
+  --vibrant-pink: #ff69b4;
+  --vibrant-green: #00ff9d;
+  --vibrant-yellow: #ffd700;
+}
+/* Add these styles to your CSS */
+body {
+  background: 
+    /* Colorful gradient background */
+    linear-gradient(135deg, #ff9a9e 0%, #fad0c4 50%, #fbc2eb 100%),
+    /* Bubble pattern overlay */
+    radial-gradient(circle at 20% 30%, rgba(255,255,255,0.3) 0%, transparent 25%),
+    radial-gradient(circle at 80% 70%, rgba(255,255,255,0.3) 0%, transparent 25%);
+  background-size: 200% 200%;
+  animation: gradientShift 15s ease infinite;
+}
+
+/* Replace the .board and game-container styles with these */
+.game-container {
+  position: relative;
+  padding: 30px;
+  border-radius: 25px;
+  overflow: hidden;
+  isolation: isolate;
+  background: linear-gradient(135deg, #f5f7fa 0%, #e0e8ff 100%);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+}
+
+.board {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+  padding: 25px;
+  border-radius: 20px;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 105, 180, 0.15) 0%,
+    rgba(65, 105, 225, 0.15) 50%,
+    rgba(0, 255, 157, 0.15) 100%
+  );
+  backdrop-filter: blur(8px);
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.1),
+    inset 0 0 20px rgba(255, 255, 255, 0.4);
+  position: relative;
+}
+
+/* Colorful cell styling */
+.cell {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(3px);
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  border-radius: 15px;
+  transition: all 0.3s ease;
+  box-shadow:
+    0 4px 10px rgba(0, 0, 0, 0.1),
+    inset 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+.cell:hover:not(.disabled) {
+  background: rgba(255, 255, 255, 0.9);
+  transform: scale(1.05);
+  box-shadow:
+    0 0 15px rgba(255, 105, 180, 0.3),
+    0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Animated background elements */
+.board::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: 
+    radial-gradient(circle at 30% 30%, rgba(138, 43, 226, 0.1) 0%, transparent 25%),
+    radial-gradient(circle at 70% 70%, rgba(255, 215, 0, 0.1) 0%, transparent 25%);
+  animation: rotateBg 20s linear infinite;
+  z-index: -1;
+}
+
+@keyframes rotateBg {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+/* Animated gradient background */
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 0%;
+  }
+  50% {
+    background-position: 100% 100%;
+  }
+  100% {
+    background-position: 0% 0%;
+  }
+}
+
+/* Score display enhancement */
+.scores {
+  background: rgba(255, 255, 255, 0.7);
+  padding: 15px;
+  border-radius: 50px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Player selection cards */
+.player-option {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(3px);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+}
+/* Add these styles to your existing CSS */
+.game-container {
+  position: relative;
+  padding: 30px;
+  border-radius: 25px;
+  overflow: hidden;
+  isolation: isolate;
+  margin: 20px auto;
+  max-width: calc(var(--cell-size) * 3 + 100px);
+}
+
+/* Colorful animated background for gaming section */
+.game-container::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: 
+    /* Colorful gradient */
+    linear-gradient(45deg, 
+      rgba(255, 105, 180, 0.2) 0%, 
+      rgba(65, 105, 225, 0.2) 50%, 
+      rgba(0, 255, 157, 0.2) 100%),
+    /* Bubble pattern */
+    radial-gradient(circle at 20% 30%, rgba(138, 43, 226, 0.15) 0%, transparent 30%),
+    radial-gradient(circle at 80% 70%, rgba(255, 215, 0, 0.15) 0%, transparent 30%);
+  animation: gameBgPulse 12s ease infinite alternate;
+  background-size: 200% 200%;
+}
+
+/* Replace the .board and game-container styles with these */
+.game-container {
+  position: relative;
+  padding: 30px;
+  border-radius: 25px;
+  overflow: hidden;
+  isolation: isolate;
+  background: linear-gradient(135deg, #f5f7fa 0%, #e0e8ff 100%);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+}
+
+.board {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+  padding: 25px;
+  border-radius: 20px;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 105, 180, 0.15) 0%,
+    rgba(65, 105, 225, 0.15) 50%,
+    rgba(0, 255, 157, 0.15) 100%
+  );
+  backdrop-filter: blur(8px);
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.1),
+    inset 0 0 20px rgba(255, 255, 255, 0.4);
+  position: relative;
+}
+
+/* Colorful cell styling */
+.cell {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(3px);
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  border-radius: 15px;
+  transition: all 0.3s ease;
+  box-shadow:
+    0 4px 10px rgba(0, 0, 0, 0.1),
+    inset 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+.cell:hover:not(.disabled) {
+  background: rgba(255, 255, 255, 0.9);
+  transform: scale(1.05);
+  box-shadow:
+    0 0 15px rgba(255, 105, 180, 0.3),
+    0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Animated background elements */
+.board::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: 
+    radial-gradient(circle at 30% 30%, rgba(138, 43, 226, 0.1) 0%, transparent 25%),
+    radial-gradient(circle at 70% 70%, rgba(255, 215, 0, 0.1) 0%, transparent 25%);
+  animation: rotateBg 20s linear infinite;
+  z-index: -1;
+}
+
+@keyframes rotateBg {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Animated background effect */
+@keyframes gameBgPulse {
+  0% {
+    background-position: 0% 0%;
+    opacity: 0.8;
+  }
+  50% {
+    background-position: 100% 100%;
+    opacity: 1;
+  }
+  100% {
+    background-position: 0% 100%;
+    opacity: 0.8;
+  }
+}
+
+/* Cell hover effect */
+.cell:hover:not(.disabled) {
+  transform: scale(1.08);
+  box-shadow: 
+    0 0 15px rgba(255, 105, 180, 0.3),
+    0 10px 25px rgba(0, 0, 0, 0.2);
+}
