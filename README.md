@@ -50,7 +50,8 @@ bash
 npm start
 Open your browser to http://localhost:3000
 
-Technologies Used 🛠️
+# Technologies Used 🛠️ #
+
 React.js
 
 CSS3 (with animations and gradients)
