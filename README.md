@@ -65,9 +65,7 @@ JavaScript (ES6+)
 ### Contributing 🤝
 Contributions are welcome! Please open an issue or pull request for any improvements.
 
-### Live Link ###
 
-https://emoji-tic-tac-toe-five.vercel.app/
 
 ### Weblink: [Live Website](https://emoji-tic-tac-toe-five.vercel.app/)
 
